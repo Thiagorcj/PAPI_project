@@ -1,4 +1,4 @@
-![Logo PAPI](https://i.imgur.com/AjKQdz9.png)
+![Logo PAPI](https://i.imgur.com/mXJxOGF.png)
 # Projeto PAPI (Personal Assistant for processing information) by BitBeats
 
 ## Processo inicial:
