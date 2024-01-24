@@ -1,3 +1,5 @@
+
+
 # Projeto PAPI (Personal Assistant for processing information) by BitBeats
 
 ## Processo inicial:
