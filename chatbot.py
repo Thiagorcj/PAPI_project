@@ -1,7 +1,7 @@
 import telebot
 import requests
 import os
-from Conection import translate_audio, transcription, resumo
+from Conection import translate_audio, transcription, resumo, stem_separation
 
 
 diretorio_atual = os.path.dirname(os.path.abspath(__file__))
@@ -101,32 +101,9 @@ def english(mensagem):
 
 @bot.message_handler(commands=['separate'])
 def separate_elements(mensagem):
-    bot.send_message(mensagem.from_user.id,f"Beleza, me diz qual elemento você quer que continue no novo áudio,com letra minuscula (vocal, drums, bass, strings ou piano), por favor")
-#/separate_elements
-def instrumentos(mensagem):
     global flag
-    if mensagem.text == 'vocal':
-        flag = '6'
-        return True
-    elif mensagem.text == 'drums':
-        flag = '7'
-        return True
-    elif mensagem.text == 'guitars':
-        flag = '8'
-        return True
-    elif mensagem.text == 'strings':
-        flag = '9'
-        return True
-    elif mensagem.text == 'bass':
-        flag = '10'
-        return True
-    elif mensagem.text == 'piano':
-        flag = '11'
-        return True
-
-@bot.message_handler(func=instrumentos)
-def instrumentos(mensagem):
-    bot.send_message(mensagem.from_user.id,f"Tudo certo, manda o audio pro PAPI aqui, que eu separo os elementos para você")
+    flag = '6'
+    bot.send_message(mensagem.from_user.id,f"Beleza, me manda o aúdio que o PAPI separa para você")
 
 @bot.message_handler(content_types=['voice','audio'])
 def audio(mensagem):
@@ -154,27 +131,8 @@ def audio(mensagem):
         #Função do translate(english) aqui
     elif flag=='6':
         file_name = process_audio(mensagem)
+        stem_separation(file_name,mensagem)
         #Conection.stem_separation(file_name,"Job_name",'Stem_Separation','Vocal')
-        flag = '0'
-    elif flag=='7':
-        file_name = process_audio(mensagem)
-        #Conection.stem_separation(file_name,"Job_name",'Stem_Separation','Drums')
-        flag = '0'
-    elif flag=='8':
-        file_name = process_audio(mensagem)
-        #Conection.stem_separation(file_name,"Job_name",'Stem_Separation','Guitars')
-        flag = '0'
-    elif flag=='9':
-        file_name = process_audio(mensagem)
-        #Conection.stem_separation(file_name,"Job_name",'Stem_Separation','Strings')
-        flag = '0'
-    elif flag=='10':
-        file_name = process_audio(mensagem)
-        #Conection.stem_separation(file_name,"Job_name",'Stem_Separation','Piano')
-        flag = '0'
-    elif flag=='11':
-        file_name = process_audio(mensagem)
-        #Conection.stem_separation(file_name,"Job_name",'Stem_Separation','Piano')
         flag = '0'
 
 bot.polling()#Gera o loop infinito da conversa do chat
