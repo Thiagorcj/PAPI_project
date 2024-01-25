@@ -7,6 +7,7 @@ Nesse repositório está presente o código do bot do Telegram. Para rodar na su
 
 ```bash
 pip install pytelegrambotapi
+pip install summy
 
 ```
 ## Bora lá para a explicação do código:

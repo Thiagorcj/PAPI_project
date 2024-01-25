@@ -1,7 +1,7 @@
 import telebot
 import requests
 import os
-from Conection import translate_audio
+from Conection import translate_audio, transcription, resumo
 
 
 diretorio_atual = os.path.dirname(os.path.abspath(__file__))
@@ -9,7 +9,7 @@ chave = "6380261490:AAHduix4ROprVAgBnKU64EzuFUpJkm3WCXI"
 bot  = telebot.TeleBot(chave)#Cria o bot 
 download_url = f'https://api.telegram.org/file/bot{chave}/'
 flag = '0'
-
+#Função que processa o aúdio, que pode ser tanto no formato .ogg (voice) quanto mp3/mp4 (audio)
 def process_audio(mensagem):
     #Audio file
     if mensagem.content_type == 'audio':
@@ -24,8 +24,20 @@ def process_audio(mensagem):
     # Constrói o caminho para o arquivo de áudio
     audio_file_name = os.path.join(diretorio_atual, f'{mensagem.from_user.first_name}_audio_{mensagem.id}.ogg')
     open(audio_file_name, 'wb').write(audio_file.content)
-    bot.reply_to(mensagem,"Áudio processado com sucesso")
+    bot.reply_to(mensagem,"Áudio processado com sucesso, aguarde um instante")
     return audio_file_name
+
+# Algumas que achei interessante pra deixar o PAPI mais completo
+def randon_messages(mensagem):
+    if mensagem.text == 'Bom dia' or mensagem.text == 'bom dia':
+         bot.send_message(mensagem.from_user.id,f"Bom dia, {mensagem.from_user.first_name}, se quiser ajuda do PAPI, manda /help")
+    elif  mensagem.text == 'Boa tarde' or mensagem.text == 'boa tarde':
+         bot.send_message(mensagem.from_user.id,f"Boa Tarde, {mensagem.from_user.first_name}, se quiser ajuda do PAPI, manda /help")
+    elif  mensagem.text == 'Boa noite' or mensagem.text == 'boa noite':
+         bot.send_message(mensagem.from_user.id,f"Boa noite, {mensagem.from_user.first_name}, se quiser ajuda do PAPI, manda /help")
+    elif  mensagem.text == 'Ola' or mensagem.text == 'ola' or mensagem.text == 'opa' or mensagem.text == 'Opa':
+         bot.send_message(mensagem.from_user.id,f"Olá, {mensagem.from_user.first_name}, se quiser ajuda do PAPI, manda /help")
+@bot.message_handler(func=randon_messages)
 
 #/start
 @bot.message_handler(commands=["start"])
@@ -69,7 +81,7 @@ def totext(mensagem):
 def translate(mensagem):
     global flag
     flag = '3'
-    bot.send_message(mensagem.from_user.id,f'''{mensagem.from_user.first_name},Selecione uma lingua:
+    bot.send_message(mensagem.from_user.id,f'''{mensagem.from_user.first_name}, selecione uma lingua:
 /portuguese: Traduzo para português
 /english: Traduzo para inglês''')
     
@@ -116,29 +128,29 @@ def instrumentos(mensagem):
 def instrumentos(mensagem):
     bot.send_message(mensagem.from_user.id,f"Tudo certo, manda o audio pro PAPI aqui, que eu separo os elementos para você")
 
-
-
-
 @bot.message_handler(content_types=['voice','audio'])
 def audio(mensagem):
     global flag
     #Resumo
     if flag=='1':
         file_name = process_audio(mensagem)
+        resumo(file_name,mensagem)
         #Função do resumo aqui
         flag = '0'
     #Totext
     elif flag=='2':
         file_name = process_audio(mensagem)
+        transcription(file_name,mensagem)
         #Função do totext aqui
         flag = '0'
     #Translate
     elif flag=='4':
         file_name = process_audio(mensagem)
-        translate_audio(file_name,mensagem)
+        translate_audio(file_name,mensagem,"Transcription-TTS")
         flag = '0'    
     elif flag=='5':
         file_name = process_audio(mensagem)
+        translate_audio(file_name,mensagem,"Transcription-TTS-(To-English)")
         #Função do translate(english) aqui
     elif flag=='6':
         file_name = process_audio(mensagem)
