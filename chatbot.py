@@ -12,10 +12,10 @@ user_states = {}
 
 diretorio_atual = os.path.dirname(os.path.abspath(__file__))
 chave = "token do bot"
-bot  = telebot.TeleBot(chave)#Cria o bot 
+bot  = telebot.TeleBot(chave) #Cria o bot 
 download_url = f'https://api.telegram.org/file/bot{chave}/'
 flag = '0'
-# Algumas coisas que achei interessante pra deixar o PAPI mais completo
+# Algumas respostas que achei interessante pra deixar o PAPI mais interativo
 def randon_messages(mensagem):
     if mensagem.text == 'Bom dia' or mensagem.text == 'bom dia':
          bot.send_message(mensagem.from_user.id,f"Bom dia, {mensagem.from_user.first_name}, se quiser ajuda do PAPI, manda /help")
@@ -38,6 +38,7 @@ Você pode acessar os seguintes comandos:
 /separate: Separo o áudio em vocais e instrumentos.
 /help: Te dou uma ajudinha.
 ''')
+    
 #/help       
 @bot.message_handler(commands=['help'])
 def responde2(mensagem):
@@ -67,6 +68,7 @@ def process_audio(mensagem):
     open(audio_file_name, 'wb').write(audio_file.content)
     bot.reply_to(mensagem,"Áudio processado com sucesso, aguarde um instante")
     return audio_file_name
+
 # /resumo
 @bot.message_handler(commands=['resumo'])
 def resumir(mensagem):

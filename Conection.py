@@ -7,9 +7,10 @@ import shutil
 import random
 from sumy_example import resumindo
 import uuid
+
 diretorio_atual = os.path.dirname(os.path.abspath(__file__))
 chave = "6380261490:AAHduix4ROprVAgBnKU64EzuFUpJkm3WCXI"
-bot  = telebot.TeleBot(chave)#Cria o bot 
+bot  = telebot.TeleBot(chave) #Cria o bot 
 download_url = f'https://api.telegram.org/file/bot{chave}/'
 flag = '0'
 
@@ -307,7 +308,6 @@ def stem_separation(file_name, mensagem):
     output_directory = f'{mensagem.from_user.id}_{str(uuid.uuid4())}_stems'
     output_directory_path = os.path.join(os.getcwd(), output_directory)
 
-    # Certifique-se de que o diretório de saída exista ou crie-o
     os.makedirs(output_directory_path, exist_ok=True)
 
     for stem_type, url in results.items():
@@ -328,7 +328,5 @@ def stem_separation(file_name, mensagem):
                 bot.send_audio(mensagem.from_user.id, audio_file)
 
             # Mensagem adicional, se necessário
-                
-
         else:
             print(f'O download falhou para {stem_type}. Código de status: {response.status_code}')
