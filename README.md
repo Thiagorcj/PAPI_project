@@ -206,7 +206,7 @@ def resumindo(text,language,sentences_count):
     return resumo
 ```
 ### Para que serve o os?
- Bom, ele funciona para ,indepedente do local que você está executando o código, os arquivos criados dentro das funções sejam colocados no mesmo diretório do chatbot.py, abaixo está a parte em que ele foi aplicado.
+ Bom, ele funciona para, indepedente do local que você está executando o código, os arquivos criados dentro das funções sejam colocados no mesmo diretório do chatbot.py, abaixo está a parte em que ele foi aplicado.
 ```python
 import os
 diretorio_atual = os.path.dirname(os.path.abspath(__file__))
@@ -258,7 +258,7 @@ def audio(mensagem):
 
 
 ### Como funciona para processar o audio?
-Cria-se uma função para baixar o audio que a pessoa envia salvar e devolver o nome do arquivo, porque com o nome conseguimos abrir o arquivo enviar para API da moises o conteudo e fazer as ações propriamente ditas.
+Cria-se uma função para baixar o audio que a pessoa envia, salvar e retornar o nome do arquivo, porque com o nome conseguimos abrir o arquivo, enviar para API da moises o conteúdo e fazer as ações propriamente ditas.
 ```python
 def process_audio(mensagem):
     #Audio file
@@ -275,7 +275,7 @@ def process_audio(mensagem):
 
     return audio_file_name
 ```
-A seguir está as funções que servem para indentificar os comandos dos usuários que são o /start,/help,/translate, /resumo, /totext, /portuguese, /english e /separate. Com as cinco últimas citadas ocorre modificação da flag para receber audio e fazer determinada ação.  
+A seguir está as funções que servem para indentificar os comandos dos usuários que são o /start, /help, /translate, /resumo, /totext, /portuguese, /english e /separate. Com as cinco últimas citadas ocorre modificação da flag para receber audio e fazer determinada ação.  
 
 ```python
 #/start
@@ -353,4 +353,4 @@ def separate_elements(mensagem):
 
 ```
 ### Planos para o futuro?
-A ideia é trazer novas funcionalidades, tornando o PAPI cada vez mais completo, além disso, deve-se criar uma arquitetura mais organizada para salvar os dados que o PAPI tem contato. 
+A ideia é trazer novas funcionalidades, tornando o PAPI cada vez mais completo. Além disso, deve-se criar uma arquitetura mais organizada para salvar os dados que o PAPI tem contato. 
