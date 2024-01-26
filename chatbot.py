@@ -11,7 +11,7 @@ class UserState:
 user_states = {}
 
 diretorio_atual = os.path.dirname(os.path.abspath(__file__))
-chave = "6380261490:AAHduix4ROprVAgBnKU64EzuFUpJkm3WCXI"
+chave = "token do bot"
 bot  = telebot.TeleBot(chave)#Cria o bot 
 download_url = f'https://api.telegram.org/file/bot{chave}/'
 flag = '0'
@@ -35,7 +35,7 @@ Você pode acessar os seguintes comandos:
 /resumo: Faço o resumo de um áudio.
 /totext: Transcrevo um áudio para você.
 /translate: Traduzo um áudio para você.
-/separate: Separo um elemento do audio.
+/separate: Separo o áudio em vocais e instrumentos.
 /help: Te dou uma ajudinha.
 ''')
 #/help       
@@ -47,7 +47,7 @@ Você pode acessar os seguintes comandos:
 /resumo: Eu faço o resumo de um áudio.
 /totext: Eu transcrevo um aúdio para você.
 /translate: Eu traduzo um aúdio para você
-/separate: Separo um elemento do audio.'''
+/separate: Separo o áudio em vocais e instrumentos.'''
     bot.reply_to(mensagem,texto)
 
 #Função que processa o aúdio, que pode ser tanto no formato .ogg (voice) quanto mp3/mp4 (audio)
@@ -130,13 +130,12 @@ def audio(mensagem):
     if current_user_state.flag == '1':
         # Resumo
         file_name = process_audio(mensagem)
-        resumo(file_name,portuguese,2, mensagem) # LEMBRAR QUE DEPOIS PODE PERGUNTAR OS PARAMETROS DE LANGUAGE E NÚMERO DE FRASES
-        current_user_state.flag = '0'
+        resumo(file_name, mensagem)
     elif current_user_state.flag == '2':
         # Totext
         file_name = process_audio(mensagem)
         transcription(file_name, mensagem)
-        current_user_state.flag = '0'
+        
     elif current_user_state.flag == '4':
         # Translate
         file_name = process_audio(mensagem)

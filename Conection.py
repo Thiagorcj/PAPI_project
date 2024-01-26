@@ -1,5 +1,4 @@
 import requests
-import json
 import time
 import telebot
 import requests
@@ -17,7 +16,7 @@ flag = '0'
 
 # Translate
 def translate_audio(filename,mensagem,workflow):
-    api_key = "8ee4c4b7-191c-432a-9e17-3c0b7b700ff7" #Music AI API key
+    api_key = "api_key_acess" #Music AI API key
     url_get_upload = "https://api.music.ai/api/upload"
     headers_get_upload = {"Authorization": api_key}
 
@@ -89,17 +88,12 @@ def translate_audio(filename,mensagem,workflow):
         voice = open(local_file_path, 'rb')
         bot.send_voice(mensagem.from_user.id, voice)
 
-        # Obtém o identificador remoto do arquivo de voz enviado
-        #file_id = response_send_voice.voice.file_id
-
-        # Agora, você pode usar o file_id para referenciar o arquivo de áudio enviado
-        #bot.send_voice(mensagem.from_user.id, file_id)
     else:
         print(f'O download falhou. Código de status: {response.status_code}')
 
 # Transcription
 def transcription(file_name,mensagem):
-    api_key = "8ee4c4b7-191c-432a-9e17-3c0b7b700ff7" #Music AI API key
+    api_key = "api_key_acess" #Music AI API key
     url_get_upload = "https://api.music.ai/api/upload"
     headers_get_upload = {"Authorization": api_key}
 
@@ -171,7 +165,7 @@ def transcription(file_name,mensagem):
 
 #Resumo
 def resumo(file_name,mensagem):
-    api_key = "8ee4c4b7-191c-432a-9e17-3c0b7b700ff7" #Music AI API key
+    api_key = "api_key_acess" #Music AI API key
     url_get_upload = "https://api.music.ai/api/upload"
     headers_get_upload = {"Authorization": api_key}
 
@@ -243,7 +237,7 @@ def resumo(file_name,mensagem):
     bot.send_message(mensagem.from_user.id,f"Resumo: {resumo}")
 
 def stem_separation(file_name, mensagem):
-    api_key = "8ee4c4b7-191c-432a-9e17-3c0b7b700ff7"  # Music AI API key
+    api_key = "api_key_acess"  # Music AI API key
     url_get_upload = "https://api.music.ai/api/upload"
     headers_get_upload = {"Authorization": api_key}
 
