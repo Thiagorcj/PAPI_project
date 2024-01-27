@@ -9,7 +9,7 @@ from sumy_example import resumindo
 import uuid
 
 diretorio_atual = os.path.dirname(os.path.abspath(__file__))
-chave = "6380261490:AAHduix4ROprVAgBnKU64EzuFUpJkm3WCXI"
+chave = "chave do bot"
 bot  = telebot.TeleBot(chave) #Cria o bot 
 download_url = f'https://api.telegram.org/file/bot{chave}/'
 flag = '0'
