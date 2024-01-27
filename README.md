@@ -213,7 +213,7 @@ diretorio_atual = os.path.dirname(os.path.abspath(__file__))
 #Dentro da função:
 audio_file_name = os.path.join(diretorio_atual, f'{mensagem.from_user.first_name}_audio_{mensagem.id}.ogg')
 ```
-### Para que servem as flags, o dicionário e a classe Update? 
+### Para que servem as flags, o dicionário e a classe UserState? 
 Elas serve selecionar, quando recebe um arquivo audio, qual dos processos ela vai fazer(flag == 1 or 2 or 3...), ou se ela não vai fazer nenhum dos processos (flag == 0). A criação da classe e o do dicionário (que utiliza o ID do usuário) foi utilizado para impossibilita o conflito quando mais de uma pessoa estivesse usando o bot. Caso isso não fosse feito, flag de um usuário podia se confundir com de outro usuário que estivesse usando ao mesmo tempo.
 ```python
 class UserState:
