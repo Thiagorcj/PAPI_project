@@ -1,6 +1,7 @@
 ![Logo PAPI](https://i.imgur.com/p04xQix.png)
 # Projeto PAPI (Personal Assistant for processing information) by BitBeats
-
+## O que é o PAPI?
+O Papi é um bot no Telegram que oferece diversas funcionalidades, incluindo a capacidade de transcrever áudios, resumir conteúdos sonoros, traduzir áudios (enviando uma versão traduzida em formato de áudio), e até mesmo separar instrumentos e vocais em uma música.
 ## Processo inicial:
 
 Nesse repositório está presente o código do bot do Telegram. Para rodar na sua máquina você deve baixar as bibliotecas como está abaixo e quando rodar o código lembrar de colocar os tokens das APIs.
